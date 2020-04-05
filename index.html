@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MiniChat</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/img/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    <meta property="og:image:width" content="279">
+    <meta property="og:image:height" content="279">
+    <meta property="og:title" content="MiniChat">
+    <meta property="og:description" content="Simple and free. Instant video-chat for small groups.">
+    <meta property="og:url" content="https://minichat.live">
+    <meta property="og:image" content="https://minichat.live/img/og-image.jpg">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133464589-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-133464589-3');
+    </script>
+
+    
+    
+    <link rel="stylesheet" href="https://files.usiku.games/css/bulma.css" />    
+    
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+      <script src="rtcmulticonnection.js"></script>
+      <script src="socketio.js"></script>
+
+      <link rel="stylesheet" href="https://files.usiku.games/css/fontawesome.css">
+
+      <link rel="stylesheet" href="mediaElements.css" />
+      <script src="mediaElements.js"></script>
+
+      <link rel="stylesheet" href="style.css" />
+      <style>
+        #menu_join{
+          font-size:1.2em;
+        }
+        
+        input.input{
+          font-size: 1.4em !important;
+        }
+      </style>
+      
+  </head>
+  <body>
+    
+    
+    <nav class="level navbar is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          <div class="title">
+            MiniChat
+          </div>
+        </div>
+      </div>
+
+      <div class="level-right">
+        <a href="/about.html" class="is-pulled-right subtitle"><i class='fas fa-question-circle'></i></a>
+      </div>
+    </nav>
+    
+    
+    <section class='section' id="menu_join">
+      <div class="box has-text-centered">
+        <p class="title">Join a chat...</p>
+        
+        <p class="">Enter the unique room 'code' to create or join any room:</p>
+        <input id="roomname" class="input required field is-fullwidth" placeholder="my_room_code"/>
+        
+        <p class="">Choose a NickName:</p>
+        <input id="nickname" class="input required field is-fullwidth" placeholder="My Name"/>
+    
+        <button id="launch_room_btn" class="field button is-success is-fullwidth is-large" disabled>Enter Room</button>
+        <!--<i>NOTE: all rooms are public</i>-->
+      </div>
+    </section>
+    
+    
+    
+    <script>
+      $(document).ready(function() {
+        console.log("document ready");
+        if(localStorage.nickname){
+          $("#nickname").val(localStorage.nickname);
+        }
+      });
+            
+      $("#roomname, #nickname").on("input", function() {
+        console.log("typing...");
+        validate();
+      });
+      
+      function validate(){
+        var code = $("#roomname").val().toLowerCase();
+        code = code.replace(' ', '_');
+        code = code.replace(/[^0-9a-z_\-]/g, '');
+        $("#roomname").val(code);
+        
+        var nickname = $("#nickname").val();
+        nickname = nickname.replace(/[^0-9a-zA-Z_\- ]/g, '');
+        $("#nickname").val(nickname);
+        
+        if(code.length>=3 && nickname.length>=3){
+          $("#launch_room_btn").attr("disabled", false);
+        }else{
+          $("#launch_room_btn").attr("disabled", true);
+        }
+      }
+      
+      $("#launch_room_btn").click(function(){
+        localStorage.roomname = $("#roomname").val().trim();
+        localStorage.nickname = $("#nickname").val().trim();
+        window.location.href = "/room/#"+ localStorage.roomname;
+      });
+      
+    </script>
+    
+  </body>
+
+
+
+</html>

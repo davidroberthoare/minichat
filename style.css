@@ -1,0 +1,212 @@
+/* CSS files add styling rules to your content */
+
+body {
+  height: 100vh;
+  background: #efefff;
+}
+
+.navbar {
+  height: 5vh !important;
+  padding: 1vh;
+  margin-bottom:0px !important;
+  background-color: transparent;
+}
+
+#videochat_container {
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /*background: yellow;*/
+}
+
+footer {
+  height: 2rem;
+  font-size: 0.8em;
+}
+
+/***** video blocks layout*/
+
+#videos-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 95%;
+  max-height: 100%;
+  transition-property: width;
+  transition-duration: 0.5s;
+}
+
+#videos-container.chatactive {
+  width: 65%;
+}
+
+/* chat messages*/
+
+#chat_container {
+  position: absolute;
+  right: 0px;
+  background: #fafafa;
+  width: 30%;
+  top: 2%;
+  bottom: 2%;
+  padding: 1em;
+  border-radius: 5px;
+  transition-property: right;
+  transition-duration: 0.5s;
+  z-index: 999;
+  padding-top: 3em;
+}
+
+#chat_container.stashed {
+  right: -28% !important;
+}
+
+#chat_open_close {
+  position: absolute;
+  left: -40px;
+  bottom: 0px;
+  cursor: pointer;
+  color: #00000060;
+}
+
+#message_container {
+  position: absolute;
+  top: 0px;
+  left: 2%;
+  right: 2%;
+  bottom: 50px;
+  flex-direction: column-reverse;
+  display: flex;
+  overflow-y: scroll;
+}
+
+#chat_input_container {
+  position: absolute;
+  bottom: 5px;
+  left: 2%;
+  right: 2%;
+}
+
+.chat_msg {
+  margin-bottom: 0.7em;
+  position: relative;
+  background: #ddd;
+  border-radius: 10px;
+  padding: 5px;
+  min-height: 3em;
+}
+
+.chat_msg.chat_local {
+  margin-left: 40px;
+  background: #c8d3de;
+}
+
+.chat_msg.chat_remote {
+  margin-right: 40px;
+}
+
+img.chat_avatar {
+  height: 35px;
+  vertical-align: middle;
+}
+
+span.chat_nickname {
+  font-size: 9px;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+
+span.chat_txt {
+  position: relative;
+  margin-left: 5px;
+  margin-top: 10px;
+  display: block;
+}
+
+.chat_local span.chat_txt {
+  margin-left: 10px;
+  margin-right: 5px;
+  text-align: right;
+}
+
+.chat_local img.chat_avatar {
+  float: right;
+  margin-left: 5px;
+}
+
+.chat_local span.chat_nickname {
+  right: 10px;
+  text-align: right;
+}
+
+.hero-body {
+  padding: 1rem 1.5rem;
+}
+
+.row.category-btn {
+  padding: 32px;
+}
+
+.box .sidebar {
+  background: #EDF2F5;
+}
+
+.box .channel-feed {
+  margin: 10px 0 10px 0;
+}
+
+.center,
+.center-column,
+.top,
+.right,
+.bottom,
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-column {
+  flex-direction: column;
+}
+
+.top {
+  align-items: flex-start;
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.bottom {
+  align-items: flex-end;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+/* phones */
+@media only screen and (max-width: 768px) {
+  #chat_container {
+    width: 80% !important;
+    background-color: #ffffffed;
+  }
+  #chat_container.stashed {
+    right: -78% !important;
+  }
+  #videochat_container {
+    height: 85vh;
+  }
+  #main_container.chatactive {
+    right: 0px !important;
+  }
+
+  #videos-container {
+    width: 96% !important;
+  }
+}
