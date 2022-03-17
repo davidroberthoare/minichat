@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MiniChat Room</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/img/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    <meta description="Simple and free. Instant video chatrooms.">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133464589-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-133464589-3');
+    </script>
+
+    
+    
+    <link rel="stylesheet" href="https://files.usiku.games/css/bulma.css" />    
+    
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+      <script src="/rtcmulticonnection.js"></script>
+      <script src="/socketio.js"></script>
+
+      <link rel="stylesheet" href="https://files.usiku.games/css/fontawesome.css">
+
+      <link rel="stylesheet" href="/mediaElements.css" />
+      <script src="/mediaElements.js"></script>
+
+      <link rel="stylesheet" href="/embed_style.css" />
+      
+  </head>
+  <body>
+    
+    
+    <!--<nav class="level navbar is-mobile">-->
+    <!--  <div class="level-left">-->
+    <!--    <div class="level-item">-->
+    <!--      <div class="title">-->
+    <!--        <span class="is-hidden-mobile">MiniChat:</span>-->
+    <!--        <span id="sharelink"><a href=""></a></span>-->
+            
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+
+    <!--  <div class="level-right">-->
+    <!--    <a href="/about.html" class="is-pulled-right subtitle"><i class='fas fa-question-circle'></i></a>-->
+    <!--  </div>-->
+    <!--</nav>-->
+    
+    
+    <section id="videochat_container">
+      <div id="videos-container" class="connectedSortable">
+        <div class="media-container placeholder"><div style="margin-top: 3em;">waiting...</div></div>
+      </div>
+      
+      <!--<div id='filmstrip' class='connectedSortable'></div>-->
+
+      <!--<div id="chat_container" class="stashed">-->
+      <!--  <i id="chat_open_close" class="fas fa-2x fa-comment"></i>-->
+      <!--  <div id="message_container"></div>-->
+      <!--  <div id="chat_input_container">-->
+      <!--    <input class="input" id="text_input" placeholder="say something..." />-->
+      <!--  </div>-->
+      <!--</div>-->
+    </section>
+    
+    
+    <script src="/embed_script.js"></script>
+    
+  </body>
+
+
+
+</html>
