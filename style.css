@@ -34,14 +34,55 @@ footer {
   flex-direction: row;
   justify-content: space-evenly;
   width: 95%;
-  max-height: 100%;
+  width: 95%;
+  height: calc(100% - 100px);
+  /*min-height: 20%;*/
   transition-property: width;
   transition-duration: 0.5s;
+  background:#fafafa;
 }
 
 #videos-container.chatactive {
   width: 65%;
 }
+
+
+#filmstrip{
+  position: absolute;
+  bottom:0px;
+  height:90px;
+  width:80%;
+  margin:0% 5%;
+  background:#fafafa;
+  border:solid thin #ddd;
+  box-shadow: inset 0 0 10px 0px #ccc;
+  overflow-x: scroll;
+}
+
+#filmstrip .media-container{
+  height: 80px !important;
+  width: 90px !important;
+  min-height: 80px !important;
+  min-width: 90px !important;
+}
+
+#filmstrip .media-controls{
+  display: none;
+}
+
+.media-container[local] video{
+    transform: rotateY(180deg);    
+}
+
+
+.media-container.ui-sortable-helper{
+    height:100px !important;
+    width:100px !important;
+    min-width: 100px !important;
+    min-height: 100px !important;
+}
+
+
 
 /* chat messages*/
 
@@ -200,7 +241,7 @@ span.chat_txt {
     right: -78% !important;
   }
   #videochat_container {
-    height: 85vh;
+    height: 90vh;
   }
   #main_container.chatactive {
     right: 0px !important;

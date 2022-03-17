@@ -29,10 +29,11 @@
 
     
     
-    
     <link rel="stylesheet" href="https://files.usiku.games/css/bulma.css" />    
     
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
       <script src="/rtcmulticonnection.js"></script>
       <script src="/socketio.js"></script>
@@ -66,9 +67,11 @@
     
     
     <section id="videochat_container">
-      <div id="videos-container" class="">
+      <div id="videos-container" class="connectedSortable">
         <div class="media-container placeholder"><div style="margin-top: 3em;">waiting...</div></div>
       </div>
+      
+      <div id='filmstrip' class='connectedSortable'></div>
 
       <div id="chat_container" class="stashed">
         <i id="chat_open_close" class="fas fa-2x fa-comment"></i>

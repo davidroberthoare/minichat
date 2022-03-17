@@ -69,8 +69,8 @@ connection.socketMessageEvent = "msg-" + roomid;
 // keep room opened even if owner leaves
 connection.autoCloseEntireSession = true;
 
-// maximum 6 users are allowed to join single room
-connection.maxParticipantsAllowed = 6;
+// maximum 9 users are allowed to join single room
+connection.maxParticipantsAllowed = 9;
 
 // by default, socket.io server is assumed to be deployed on your own URL
 // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
@@ -160,7 +160,7 @@ connection.onstream = function(event) {
   var mediaElement = getHTMLMediaElement(video, {
     title: "", //event.userid,
     // buttons: ['full-screen'],
-    buttons: event.type === "local" ? ["mute-audio", "stop"] : ["mute-audio"],
+    buttons: event.type === "local" ? ["mute-audio", "stop"] : ["mute-audio", "stop"],
     // buttons: (event.type === 'local') ? [] : ['stop'],
     // width: (event.type === 'local') ? width/2 : width,
     width: "100%",
@@ -195,6 +195,7 @@ connection.onstream = function(event) {
   }
 
   connection.videosContainer.appendChild(mediaElement);
+  doLayout();
 
   setTimeout(function() {
     mediaElement.media.play();
@@ -224,6 +225,14 @@ connection.onstreamended = function(event) {
   }
   setVideoState("disconnected");
 };
+
+connection.onleave = function(event) {
+    var remoteUserId = event.userid;
+    var remoteUserFullName = event.extra.fullName;
+
+    console.log(remoteUserFullName + ' left you.');
+};
+
 
 connection.onMediaError = function(e) {
   if (e.message === "Concurrent mic process limit.") {
@@ -374,9 +383,46 @@ if (
   console.log("2G is not supported. Please use a better internet service.");
 }
 
-// $("#overlay").click(function(){
-//   enterRoom();
-// });
+
+$(window).on('resize orientationchange', function(){
+  setTimeout(function() {doLayout()}, 100);
+});
+
+function doLayout(){
+  var num = $(".media-container:visible").length;
+  var orientation = (window.innerHeight > window.innerWidth) ? 'portrait' : 'landscape';
+  console.log("adjusting layout for ", num, orientation);
+  var rows = 1;
+  var cols = 1;
+  //for landscape
+  if(orientation=='landscape'){
+    if(num==2){ rows=1; cols=2; }
+    if(num==3){ rows=1; cols=3; }
+    if(num==4){ rows=2; cols=2; }
+    if(num>=5){ rows=2; cols=3; }
+    if(num>=7){ rows=2; cols=4; }
+    if(num==9){ rows=3; cols=3; }
+  }
+  
+  //for landscape
+  else if(orientation=='portrait'){
+    if(num==2){ rows=2; cols=1; }
+    if(num==3){ rows=3; cols=1; }
+    if(num==4){ rows=2; cols=2; }
+    if(num>=5){ rows=3; cols=2; }
+    if(num>=7){ rows=4; cols=2; }
+    if(num==9){ rows=3; cols=3; }
+  }
+  
+  var marginPercent = 3;
+  var h=(100/rows) - marginPercent;
+  var w=(100/cols) - marginPercent;
+  $(".media-container").css("width", w+"%").css("height", h+"%")
+}
+
+
+
+
 
 $(document).ready(function() {
   // setVideoState("disconnected"); // set default look
@@ -390,7 +436,15 @@ $(document).ready(function() {
   } else {
     console.log("no roomid. doing nothing");
   }
+  
+  $( ".connectedSortable" ).sortable({
+    connectWith: ".connectedSortable",
+    cursor: "move", 
+    cursorAt: { left: 50, top:50 }
+  }).disableSelection();
+    
 });
+
 
 // window.onkeyup = function(e) {
 //   var code = e.keyCode || e.which;
@@ -398,6 +452,18 @@ $(document).ready(function() {
 //     sendChatMessage();
 //   }
 // };
+
+// for testing layout only...
+$(document).on("keypress", function(e) {
+    if (event.charCode == 43) { //plus
+        $("#videos-container").append("<div class='media-container'>media</div>");
+        setTimeout(doLayout, 50);
+    }
+    if (event.charCode == 95) { //minues
+        $(".media-container").last().remove();
+        setTimeout(doLayout, 50);
+    }
+});
 
 $("#text_input").on("keypress", function(e) {
   if (event.charCode == 13) {
